@@ -27,7 +27,7 @@ Before you start contributing, please take a moment to review the following guid
    git push origin feature/awesome-new-feature
    ```
 
-7. **Create a Pull Request (PR)**: Go to the [original SketchAnimate repository](https://github.com/your-username/SketchAnimate) and click the "New Pull Request" button. Provide a detailed description of your changes, including any relevant information for reviewers.
+7. **Create a Pull Request (PR)**: Go to the [original SketchAnimate repository](https://github.com/Vidoux/SketchAnimate) and click the "New Pull Request" button. Provide a detailed description of your changes, including any relevant information for reviewers.
 
 8. **Review and Collaboration**: Participate in the discussion on your PR. Be open to feedback and be ready to make adjustments if necessary.
 
@@ -41,11 +41,11 @@ Before you start contributing, please take a moment to review the following guid
 
 ## Reporting Issues
 
-If you encounter a bug, have a feature request, or want to discuss improvements, please feel free to [open an issue](https://github.com/your-username/SketchAnimate/issues) on the GitHub repository. Be sure to provide a clear and detailed description of the problem or suggestion.
+If you encounter a bug, have a feature request, or want to discuss improvements, please feel free to [open an issue](https://github.com/Vidoux/SketchAnimate/issues) on the GitHub repository. Be sure to provide a clear and detailed description of the problem or suggestion.
 
 ## Communication
 
-We encourage open and respectful communication within the SketchAnimate community. You can reach out for assistance, questions, or discussions on the [GitHub issues](https://github.com/your-username/SketchAnimate/issues) or via our [community forum](https://community.sketchanimate.com).
+We encourage open and respectful communication within the SketchAnimate community. You can reach out for assistance, questions, or discussions on the [GitHub issues](https://github.com/Vidoux/SketchAnimate/issues) or via our [community forum](https://community.sketchanimate.com).
 
 ## License
 
