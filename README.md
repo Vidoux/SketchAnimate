@@ -29,7 +29,7 @@ In the realm of technical drawings, animation adds a new dimension of clarity an
 
 To get started with SketchAnimate, follow these steps:
 
-1. Clone the repository: `git clone https://github.com/your-username/SketchAnimate.git`
+1. Clone the repository: `git clone https://github.com/Vidoux/SketchAnimate.git`
 3. Explore the documentation in the `docs` folder for detailed usage instructions.
 
 ## Usage
@@ -38,7 +38,7 @@ SketchAnimate's usage is documented extensively in our [User Guide](docs/user-gu
 
 ## Contributing
 
-We welcome contributions from the community to make SketchAnimate even better. If you'd like to contribute, please follow our [Contribution Guidelines](CONTRIBUTING.md) and check out the [Issues](https://github.com/your-username/SketchAnimate/issues) for open tasks.
+We welcome contributions from the community to make SketchAnimate even better. If you'd like to contribute, please follow our [Contribution Guidelines](CONTRIBUTING.md) and check out the [Issues](https://github.com/Vidoux/SketchAnimate/issues) for open tasks.
 
 ## License
 
