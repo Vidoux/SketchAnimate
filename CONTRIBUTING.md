@@ -6,7 +6,7 @@ Before you start contributing, please take a moment to review the following guid
 
 ## How to Contribute
 
-1. **Fork the Repository**: Click the "Fork" button on the top right corner of the [SketchAnimate repository](https://github.com/your-username/SketchAnimate) on GitHub. This will create a copy of the repository in your own GitHub account.
+1. **Fork the Repository**: Click the "Fork" button on the top right corner of the [SketchAnimate repository](https://github.com/Vidoux/SketchAnimate) on GitHub. This will create a copy of the repository in your own GitHub account.
 
 2. **Clone Your Fork**: Clone your forked repository to your local development environment using the following command:
    ```
