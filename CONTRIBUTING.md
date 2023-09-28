@@ -52,7 +52,3 @@ We encourage open and respectful communication within the SketchAnimate communit
 By contributing to SketchAnimate, you agree that your contributions will be licensed under the [MIT License](LICENSE).
 
 Thank you for contributing to SketchAnimate and helping make it even better!
-
----
-
-Please replace "your-username" with your actual GitHub username and adjust any URLs or specific details to match your project's repository and communication channels. Feel free to expand these guidelines with any additional information or specific requirements for your project.
