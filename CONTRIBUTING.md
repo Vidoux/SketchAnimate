@@ -45,7 +45,7 @@ If you encounter a bug, have a feature request, or want to discuss improvements,
 
 ## Communication
 
-We encourage open and respectful communication within the SketchAnimate community. You can reach out for assistance, questions, or discussions on the [GitHub issues](https://github.com/Vidoux/SketchAnimate/issues) or via our [community forum](https://community.sketchanimate.com).
+We encourage open and respectful communication within the SketchAnimate community. You can reach out for assistance, questions, or discussions on the [GitHub issues](https://github.com/Vidoux/SketchAnimate/issues)
 
 ## License
 
