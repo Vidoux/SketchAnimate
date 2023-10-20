@@ -2,6 +2,8 @@ import xml.etree.ElementTree as ET
 import cairosvg
 import imageio.v2 as imageio  # Utilisation de la version 2 pour éviter les avertissements de dépréciation
 import math
+import os
+import numpy as np
 
 
 def modify_svg_rotation(input_svg, output_svg, rotation_degree):
@@ -24,8 +26,8 @@ def modify_svg_rotation(input_svg, output_svg, rotation_degree):
 
 
 def main():
-    input_svg = "square_input.svg"  # Sauvegardez votre SVG avec ce nom ou modifiez cette ligne
-    output_gif = "rolling_rectangle.gif"
+    input_svg = "square_input.svg"
+    output_gif = "square.gif"
 
     images = []
 
@@ -37,10 +39,22 @@ def main():
         # Convertir SVG en PNG
         cairosvg.svg2png(url=temp_svg, write_to=output_png)
 
-        images.append(imageio.imread(output_png))
+        # Lire l'image PNG et ajouter un fond blanc si nécessaire
+        png_image = imageio.imread(output_png)
+        if png_image.shape[2] == 4:  # Vérifier la présence d'un canal alpha
+            # Convertir le canal alpha en un fond blanc
+            white_background = np.ones_like(png_image[:, :, :3]) * 255
+            alpha = png_image[:, :, 3:4] / 255.0
+            png_image = (png_image[:, :, :3] * alpha + white_background * (1 - alpha)).astype(np.uint8)
+        images.append(png_image)
 
     # Créer un GIF à partir des images PNG
     imageio.mimsave(output_gif, images, duration=0.1)  # 0.1 seconde par image
+
+    # Supprimer les fichiers PNG et SVG intermédiaires
+    for degree in range(0, 361, 10):
+        os.remove(f"temp_{degree}.png")
+        os.remove(f"temp_{degree}.svg")
 
 
 if __name__ == "__main__":
