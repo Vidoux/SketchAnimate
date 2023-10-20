@@ -4,6 +4,10 @@
 
 SketchAnimate is an open-source project aimed at developing a Domain Specific Language (DSL) for animating technical drawings using Scalable Vector Graphics (SVG) files. This DSL is designed to empower users to animate elements within technical drawings, offering control over movement, visibility, size, color changes, and fading, among other capabilities.
 
+## Kanban Board
+
+We manage our project tasks and development progress using a Kanban board. You can view and track our work on the [SketchAnimate Kanban board](https://tree.taiga.io/project/vidoux-sketchanimate/kanban).
+
 ## Table of Contents
 
 - [Overview](#overview)
