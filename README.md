@@ -52,6 +52,12 @@ Here is a list of differnts projects about animating svg or working around anima
 
 - **[Rive](https://github.com/rive-app/rive)**: Rive is an open-source animation library that allows you to create interactive animations for the web and applications. You can create vector animations and integrate them into your projects.
 
+## References 
+
+- "Crafting Interpreters: A Handbook for Making Programming Languages" written by Robert Nystrom
+- website: [https://craftinginterpreters.com/](https://craftinginterpreters.com/)
+  
+
 ## Contributing
 
 We welcome contributions from the community to make SketchAnimate even better. If you'd like to contribute, please follow our [Contribution Guidelines](CONTRIBUTING.md) and check out the [Issues](https://github.com/Vidoux/SketchAnimate/issues) for open tasks.
