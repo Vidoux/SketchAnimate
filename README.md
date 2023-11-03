@@ -40,6 +40,24 @@ To get started with SketchAnimate, follow these steps:
 
 SketchAnimate's usage is documented extensively in our [User Guide](docs/user-guide.md). Please refer to it for in-depth instructions on creating animations, scripting, and exporting your animated drawings.
 
+## Similar or related projects:
+
+Here is a list of differnts projects about animating svg or working around animation: 
+
+- **[Lottie](https://github.com/airbnb/lottie-web)**: Lottie is an open-source library from AirBnB that enables the creation and playback of vector animations. It's particularly well-suited for integrating animations into web and mobile applications.
+
+- **[Raphael.js](https://github.com/DmitryBaranovskiy/raphael)**: Raphael.js is a JavaScript library that simplifies the creation of animations and vector graphics. It provides features for manipulating SVG elements and creating interactive visualizations.
+
+- **[Snap.svg](https://github.com/adobe-webplatform/Snap.svg)**: Snap.svg is a JavaScript library similar to Raphael.js, designed for manipulating and animating SVG elements. It offers an efficient way to create SVG-based animations and interactions.
+
+- **[Rive](https://github.com/rive-app/rive)**: Rive is an open-source animation library that allows you to create interactive animations for the web and applications. You can create vector animations and integrate them into your projects.
+
+## References 
+
+- "Crafting Interpreters: A Handbook for Making Programming Languages" written by Robert Nystrom
+- website: [https://craftinginterpreters.com/](https://craftinginterpreters.com/)
+  
+
 ## Contributing
 
 We welcome contributions from the community to make SketchAnimate even better. If you'd like to contribute, please follow our [Contribution Guidelines](CONTRIBUTING.md) and check out the [Issues](https://github.com/Vidoux/SketchAnimate/issues) for open tasks.
