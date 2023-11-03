@@ -1,0 +1,27 @@
+# Dossiers générés par ANTLR
+/antlr_build
+/target
+/gen
+
+# Fichiers générés par ANTLR
+*.interp
+*.tokens
+*.pyc
+
+# Fichiers temporaires
+*~
+
+# Dossiers et fichiers spécifiques à votre environnement de développement
+/__pycache__
+/.idea
+/.vscode
+/.vs
+/.gitattributes
+/.gitignore
+
+# Fichiers de sauvegarde de l'éditeur
+.vscode/
+*.swp
+
+# Fichiers de configuration
+.idea/
