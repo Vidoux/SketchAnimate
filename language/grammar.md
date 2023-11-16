@@ -52,10 +52,3 @@ Here are some examples of SketchAnimate scripts:
 ```
 
 ## References
-
-For more information on advanced usage of the SketchAnimate language, refer to the following resources:
-
-- [Complete SketchAnimate Documentation](../docs/user-guide.md)
-```
-
-You can use this structure as a template for documenting the grammar of your SketchAnimate language. Just replace the content with your specific language rules, syntax, and examples.
