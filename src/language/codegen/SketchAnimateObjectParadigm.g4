@@ -1,4 +1,4 @@
-grammar SketchAnimate;
+grammar SketchAnimateObjectParadigm;
 
 // Lexer Rules
 ID     : [a-zA-Z]+ ;                 // Identifiers
