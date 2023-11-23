@@ -6,7 +6,8 @@ antlr4
 ```
 
 ```bash
-antlr4 -Dlanguage=Python3 SketchAnimateObjectParadigm.g4 -o ./antlr_build -visitor
+# antlr4 -Dlanguage=Python3 SketchAnimateObjectParadigm.g4 -o ./antlr_build -visitor
+antlr4 -Dlanguage=Python3 SketchAnimateImperativeParadigm.g4 -o ./antlr_build -visitor
 ```
 
 ```bash
