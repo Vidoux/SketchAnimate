@@ -6,7 +6,7 @@ antlr4
 ```
 
 ```bash
-antlr4 -Dlanguage=Python3 SketchAnimate.g4 -o ./antlr_build
+antlr4 -Dlanguage=Python3 SketchAnimate.g4 -o ./antlr_build -visitor
 ```
 
 ```bash
