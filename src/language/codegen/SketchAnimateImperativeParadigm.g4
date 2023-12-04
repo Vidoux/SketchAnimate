@@ -1,15 +1,13 @@
 grammar SketchAnimateImperativeParadigm;
 
 // Lexer Rules
-ID : [a-zA-Z] [a-zA-Z0-9]* ;         // Identifiers
+ID     : [a-zA-Z] [a-zA-Z0-9]* ;     // Identifiers
 INT    : [0-9]+ ;                    // Integer numbers
 SEMI   : ';' ;                       // Semicolon
 ASSIGN : '=' ;                       // Assignment
 COMMA  : ',' ;                       // Comma
 DOT    : '.' ;                       // Dot
 WS     : [ \t\r\n]+ -> skip ;        // Whitespace to be ignored
-IDList : ID (COMMA WS* ID)* ;            // List of identifiers
-
 
 // Parser Rules
 program : statement+ ;
@@ -17,18 +15,15 @@ program : statement+ ;
 statement : groupDeclaration SEMI
           | animationStatement SEMI ;
 
+groupDeclaration : 'createGroup' ID '(' idList ')' ;
 
-groupDeclaration : 'createGroup' ID '(' IDList ')' ;
-
-
-groupID : ID ;
-
+idList : ID (COMMA ID)* ;            // List of identifiers
 
 animationStatement : action '(' target (COMMA arguments)? ')' ;
 
-target : ID | groupID ; // Target can be an individual ID or a group
+target : ID ; // Target can be an individual ID
 
-action : 'moveTo' | 'resize' | 'changeColor' ; // Actions to manipulate objects or groups
+action : 'moveTo' | 'resize' | 'changeColor' ; // Actions to manipulate objects
 
 arguments : INT (COMMA INT)* ; // Arguments for actions
 
