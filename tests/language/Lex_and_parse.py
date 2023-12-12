@@ -10,6 +10,7 @@ from SketchAnimateExecutor import SketchAnimateExecutor
 input_stream = FileStream("example2_Imperative.ska")
 lexer = SketchAnimateImperativeParadigmLexer(input_stream)
 token_stream = CommonTokenStream(lexer)
+print(token_stream.getText())
 parser = SketchAnimateImperativeParadigmParser(token_stream)
 parser.addErrorListener(tests.language.ErrorListenerTest.ErrorListenerTest())
 tree = parser.program()  # 'program' is root rule

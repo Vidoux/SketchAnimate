@@ -1,3 +1,6 @@
-createGroup group1(circle1, rect1);
-moveTo(group1, 100, 100);
-resize(circle1, 50);
+
+main {
+    createGroup group1(circle1, rect1);
+    moveTo(group1, 100, 100);
+    resize(circle1, 50);
+}

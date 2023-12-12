@@ -1,0 +1,8 @@
+main {
+    createGroup paramGroup(rectangle1);
+    parameterSequence(paramGroup, 200, 200, 500);
+}
+
+sequence parameterSequence(group, x, y, duration) {
+    moveTo(group, x, y, duration);
+}

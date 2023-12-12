@@ -14,20 +14,20 @@ class TestSketchAnimateLexerParser(unittest.TestCase):
         parser.program()
         self.assertEqual(parser.getNumberOfSyntaxErrors(), expected_errors, f"Syntax errors found in {file_path}")
 
-    def test_create_group(self):
-        self.run_test_file('test_create_group.ska')
+    def test_main_sequence(self):
+        self.run_test_file('test_main_sequence.ska')
 
-    def test_move_to(self):
-        self.run_test_file('test_move_to.ska')
+    def test_sequence_params(self):
+        self.run_test_file('test_sequence_params.ska')
 
-    def test_rotate(self):
-        self.run_test_file('test_rotate.ska')
+    def test_sequence_nesting(self):
+        self.run_test_file('test_sequence_nesting.ska')
 
-    def test_change_color(self):
-        self.run_test_file('test_change_color.ska')
+    def test_sequence_declaration(self):
+        self.run_test_file('test_sequence_declaration.ska')
 
-    def test_syntax_error(self):
-        self.run_test_file('test_syntax_error.ska', expected_errors=1)
+    def test_sequence_error(self):
+        self.run_test_file('test_sequence_error.ska', expected_errors=1)
 
 
 if __name__ == '__main__':

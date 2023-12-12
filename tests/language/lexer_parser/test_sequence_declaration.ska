@@ -1,0 +1,8 @@
+main {
+    createGroup declaredGroup(triangle);
+    declaredSequence(declaredGroup);
+}
+
+sequence declaredSequence(group) {
+    rotate(group, 45, 100);
+}

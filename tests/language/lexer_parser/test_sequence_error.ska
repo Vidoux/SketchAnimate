@@ -1,0 +1,3 @@
+main {
+    createGroup errorGroup(line2, "error_string");
+}

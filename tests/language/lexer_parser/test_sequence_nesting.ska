@@ -1,0 +1,12 @@
+main {
+    createGroup nestedGroup(circle1);
+    outerSequence(nestedGroup);
+}
+
+sequence outerSequence(group) {
+    innerSequence(group);
+}
+
+sequence innerSequence(group) {
+    moveTo(group, 300, 300, 700);
+}
