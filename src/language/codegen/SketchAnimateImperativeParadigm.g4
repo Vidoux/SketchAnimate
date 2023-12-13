@@ -56,7 +56,7 @@ actionParameters : moveToParams | rotateParams | colorParams | visibilityParams 
 
 moveToParams : expression COMMA expression COMMA expression ; // x, y, duration
 rotateParams : expression COMMA expression ;           // angle, duration
-colorParams : expression ;    //TODO ajout type                // Color as a string (could be text, hex, or rgba)
+colorParams : expression ;    //TODO add color type
 visibilityParams : expression ;             // true for visible, false for invisible
 
 // Example :

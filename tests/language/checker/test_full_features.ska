@@ -1,11 +1,11 @@
 // Bloc principal pour l'execution des instructions
 main {
     // Test du chargement d'un fichier SVG
-    loadSVG("./lexer_parser/example.svg");
+    loadSVG("./example.svg");
 
     // Test de création de groupes et d'éléments
     createGroup mainGroup(circle1, square1);
-    createGroup secondaryGroup(triangle1, line1);
+    createGroup secondaryGroup(triangle2, line1);
 
 
     // Test des différentes actions d'animation
