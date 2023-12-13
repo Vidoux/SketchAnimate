@@ -20,21 +20,16 @@ groupDeclaration : 'createGroup' ID '(' idList ')' ;
 
 idList : ID (COMMA ID)* ;              // List of identifiers
 
-animationStatement : action '(' target (COMMA actionParameters)? ')' ;
+animationStatement : action '(' target COMMA actionParameters ')' ;
 
 target : ID ;                          // Target can be an individual ID or a group
 
-action : 'moveTo' | 'rotate' | 'changeColor' | 'setVisible' | 'exportAsGif' | 'exportAsVideo' ;
+action : 'moveTo' | 'rotate' | 'changeColor' | 'setVisible' | 'exportAsGif' | 'exportAsVideo' | 'resize';
 
-actionParameters : moveToParams | rotateParams | colorParams | visibilityParams | exportParams ;
+parameter : INT | STRING | BOOLEAN ;   // Parameters can be integers, strings, or booleans
 
-moveToParams : INT COMMA INT COMMA INT ; // x, y, duration
-rotateParams : INT COMMA INT ;           // angle, duration
-colorParams : STRING ;                   // Color as a string (could be text, hex, or rgba)
-visibilityParams : BOOLEAN ;             // true for visible, false for invisible
-exportParams : STRING ;                  // file format
+actionParameters : parameter (COMMA parameter)* ;
 
-// Example :
-// createGroup group1(circle1, rect1);
-// moveTo(group1, 100, 100);
-// resize(circle1, 50);
+// Examples:
+// moveTo(svg1, 100, 100);
+// resize(svg1, 50);
