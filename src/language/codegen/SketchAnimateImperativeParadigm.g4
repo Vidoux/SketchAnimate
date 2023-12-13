@@ -26,7 +26,15 @@ parameter : ID ;
 
 statement : groupDeclaration SEMI
           | animationStatement SEMI
-          | sequenceInvocation SEMI ;
+          | sequenceInvocation SEMI
+          | loadSVGStatement SEMI
+          | exportAnimationStatement SEMI;
+
+loadSVGStatement : 'loadSVG' '(' STRING ')' ;
+exportAnimationStatement : 'exportAnimation' '(' exportParams ')' ;
+exportParams : formatParam (COMMA additionalParam)* ;
+formatParam : 'gif' | 'mp4' | 'images' ;
+additionalParam : STRING ;
 
 groupDeclaration : 'createGroup' ID '(' idList ')' ;
 
@@ -50,7 +58,6 @@ moveToParams : expression COMMA expression COMMA expression ; // x, y, duration
 rotateParams : expression COMMA expression ;           // angle, duration
 colorParams : expression ;    //TODO ajout type                // Color as a string (could be text, hex, or rgba)
 visibilityParams : expression ;             // true for visible, false for invisible
-exportParams : STRING ;                  // file format
 
 // Example :
 // main {

@@ -1,0 +1,30 @@
+// Bloc principal pour l'execution des instructions
+main {
+    // Test du chargement d'un fichier SVG
+    loadSVG("/chemin/vers/le/fichier.svg");
+
+    // Test de création de groupes et d'éléments
+    createGroup mainGroup(circle1, square1);
+    createGroup secondaryGroup(triangle1, line1);
+
+
+    // Test des différentes actions d'animation
+    moveTo(mainGroup, 100, 100, 300);
+    rotate(square1, 45, 200);
+    changeColor(circle1, "red");
+    setVisible(triangle1, false);
+
+    // Test des séquences
+    customAnimation(mainGroup);
+
+    // Test de l'exportation
+    exportAnimation(gif, "/chemin/export/animation.gif");
+    exportAnimation(mp4, "/chemin/export/animation.mp4");
+    exportAnimation(images, "/chemin/export/frames/", "framePrefix");
+}
+
+// Définition d'une séquence personnalisée
+sequence customAnimation(group) {
+    moveTo(group, 200, 200, 400);
+    changeColor(group, "blue");
+}

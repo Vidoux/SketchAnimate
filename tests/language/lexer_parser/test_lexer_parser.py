@@ -7,7 +7,7 @@ from src.language.codegen.antlr_build.SketchAnimateImperativeParadigmParser impo
 class TestSketchAnimateLexerParser(unittest.TestCase):
 
     def run_test_file(self, file_path, expected_errors=0):
-        input_stream = FileStream(file_path)
+        input_stream = FileStream(file_path, encoding='utf-8')
         lexer = SketchAnimateImperativeParadigmLexer(input_stream)
         stream = CommonTokenStream(lexer)
         parser = SketchAnimateImperativeParadigmParser(stream)
@@ -25,6 +25,9 @@ class TestSketchAnimateLexerParser(unittest.TestCase):
 
     def test_sequence_declaration(self):
         self.run_test_file('test_sequence_declaration.ska')
+
+    def test_full_features(self):
+        self.run_test_file('test_full_features.ska')
 
     def test_sequence_error(self):
         self.run_test_file('test_sequence_error.ska', expected_errors=1)
