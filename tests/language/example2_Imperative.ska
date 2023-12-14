@@ -1,2 +1,5 @@
-moveTo(svg2, 100, 100);
-resize(svg2, 100, 100);
+changeColor(rect5719, blue);
+resize(rect5719, 50, 100);
+changeColor(rect5719, green);
+rotate(rect5719, 20);
+
