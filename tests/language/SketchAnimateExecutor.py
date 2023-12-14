@@ -1,16 +1,25 @@
 from src.language.codegen.antlr_build.SketchAnimateImperativeParadigmParser import SketchAnimateImperativeParadigmParser
 from src.language.codegen.antlr_build.SketchAnimateImperativeParadigmVisitor import SketchAnimateImperativeParadigmVisitor
 from src.animation.AnimationLib import SVGAnimationLib
-import os
-from PIL import Image
+
+
+file_path = 'square_input.svg'
+copy_file_path = 'square_input_copy.svg'
+
+# Lire le contenu du fichier SVG original
+with open(file_path, 'r') as file:
+    svg_content = file.read()
+
+# Créer une copie du fichier SVG
+with open(copy_file_path, 'w') as file:
+    file.write(svg_content)
 
 class SketchAnimateExecutor(SketchAnimateImperativeParadigmVisitor):
-
 
     def __init__(self):
         # Initialiser un dictionnaire pour stocker les groupes
         self.groups = {}
-
+        self.anim_lib = SVGAnimationLib(svg_content)  # svg_content_initial doit être défini
 
     def visitGroupDeclaration(self, ctx: SketchAnimateImperativeParadigmParser.GroupDeclarationContext):
         group_id = ctx.ID().getText()  # Nom du groupe
@@ -35,11 +44,7 @@ class SketchAnimateExecutor(SketchAnimateImperativeParadigmVisitor):
         print(f"Animating {target_id} with action {action}")
 
     def executeAction(self,target, action, parameters):
-        file_path = 'square_input.svg'
 
-        # Lire le contenu du fichier SVG
-        with open(file_path, 'r') as file:
-            svg_content = file.read()
 
         anim_lib = SVGAnimationLib(svg_content)
 
@@ -61,3 +66,6 @@ class SketchAnimateExecutor(SketchAnimateImperativeParadigmVisitor):
 
         with open('updated_square.svg', 'w') as file:
             file.write(updated_svg_content)
+
+    def finalize_animation(self, output_gif_path):
+        self.anim_lib.create_gif(output_gif_path)
