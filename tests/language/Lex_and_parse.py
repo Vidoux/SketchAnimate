@@ -17,3 +17,6 @@ tree = parser.program()  # 'program' is root rule
 executor = SketchAnimateExecutor()
 executor.visit(tree)
 
+
+executor.finalize_animation("final_animation.gif")
+print("end ")
