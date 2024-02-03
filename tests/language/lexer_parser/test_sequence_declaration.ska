@@ -4,5 +4,5 @@ main {
 }
 
 sequence declaredSequence(group) {
-    rotate(group, 45, 100);
+    rotate(group, 400, 600, 20);
 }
