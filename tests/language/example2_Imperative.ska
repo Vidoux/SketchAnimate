@@ -1,5 +1,6 @@
-changeColor(rect5719, blue);
-resize(rect5719, 50, 100);
-changeColor(rect5719, green);
-rotate(rect5719, 20);
+main {
+    createGroup group1(circle1, rect1);
+    moveTo(group1, 100, 100);
+    resize(circle1, 50);
+}
 

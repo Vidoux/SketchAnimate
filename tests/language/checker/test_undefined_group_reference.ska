@@ -1,0 +1,3 @@
+main {
+    moveTo(undefinedGroup, 0, 500, 100, 100); // Reference to an undefined group
+}

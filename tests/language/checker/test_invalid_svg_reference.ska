@@ -1,0 +1,4 @@
+main {
+    loadSVG("./example.svg");
+    moveTo(Undefined_Triangle, 0, 500, 50, 50);
+}

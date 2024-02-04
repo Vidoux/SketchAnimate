@@ -1,35 +1,85 @@
 grammar SketchAnimateImperativeParadigm;
 
 // Lexer Rules
-ID       : [a-zA-Z] [a-zA-Z0-9]* ;     // Identifiers
-INT      : [0-9]+ ;                    // Integer numbers
-SEMI     : ';' ;                       // Semicolon
-COMMA    : ',' ;                       // Comma
-DOT      : '.' ;                       // Dot
-WS       : [ \t\r\n]+ -> skip ;        // Whitespace to be ignored
-STRING   : '"' .*? '"';                // String literal for all quoted content
-BOOLEAN  : 'true' | 'false';           // Boolean values
+// Basic tokens
+ID        : [a-zA-Z] [a-zA-Z0-9_]* ;     // Identifiers
+INT       : [0-9]+ ;                    // Integer numbers
+FLOAT     : [0-9]+'.'[0-9]+ ;           // Float values
+STRING    : '"' .*? '"';                // String literal for all quoted content
+BOOLEAN   : 'true' | 'false';           // Boolean values
+
+// Punctuation and Whitespace
+SEMI      : ';' ;                       // Semicolon
+COMMA     : ',' ;                       // Comma
+DOT       : '.' ;                       // Dot
+WS        : [ \t\r\n]+ -> skip ;        // Whitespace to be ignored
+
+// Comments
+LINE_COMMENT  : '//' ~[\r\n]* -> skip ;
+BLOCK_COMMENT : '/*' .*? '*/' -> skip ;
 
 // Parser Rules
-program : statement+ ;
+program : mainBlock sequence* ;
 
+mainBlock : 'main' '{' statement* '}' ;
+
+// Sequences and invocations
+sequence          : 'sequence' ID '(' parameterList? ')' '{' statement* '}' ;
+sequenceInvocation: ID '(' argumentList? ')' ;
+
+parameterList : parameter (COMMA parameter)* ;
+parameter     : ID ;
+argumentList  : expression (COMMA expression)* ;
+
+// Statements
 statement : groupDeclaration SEMI
-          | animationStatement SEMI ;
+          | animationStatement SEMI
+          | sequenceInvocation SEMI
+          | loadSVGStatement SEMI
+          | exportAnimationStatement SEMI
+          | delayStatement SEMI; // Add delayStatement to the list of statements
 
+// SVG related
+loadSVGStatement : 'loadSVG' '(' STRING ')' ;
+
+// Exporting animations
+exportAnimationStatement : 'exportAnimation' '(' exportParams ')' ;
+exportParams : formatParam COMMA pathParam ;
+formatParam  : 'gif' | 'mp4' | 'images' ;
+pathParam : STRING;
+
+// Group declarations
 groupDeclaration : 'createGroup' ID '(' idList ')' ;
+idList : ID (COMMA ID)* ;
 
-idList : ID (COMMA ID)* ;              // List of identifiers
+// Animation statements
+animationStatement : moveToStatement
+                   | rotateStatement
+                   | changeColorStatement
+                   | setVisibleStatement
+                   ;
 
-animationStatement : action '(' target COMMA actionParameters ')' ;
+moveToStatement      : 'moveTo' '(' target COMMA startTime COMMA duration COMMA moveToParams ')' ;
+rotateStatement      : 'rotate' '(' target COMMA startTime COMMA duration COMMA rotateParams ')' ;
+changeColorStatement : 'changeColor' '(' target COMMA startTime COMMA duration COMMA colorParams ')' ;
+setVisibleStatement  : 'setVisible' '(' target COMMA startTime COMMA duration COMMA visibilityParams ')' ;
 
-target : ID ;                          // Target can be an individual ID or a group
+// Time related parameters
+startTime : expression ; // start time for animation (in ms)
+duration  : expression ; // animation duration (in ms)
+delayStatement : 'delay' '(' expression ')' ; // Introduces a waiting delay
 
-action : 'moveTo' | 'rotate' | 'changeColor' | 'setVisible' | 'exportAsGif' | 'exportAsVideo' | 'resize';
 
-parameter : INT | STRING | BOOLEAN ;   // Parameters can be integers, strings, or booleans
+// Specific action parameters
+moveToParams : expression COMMA expression ; // x, y
+rotateParams : expression ;             // angle
+colorParams  : expression ;           // TODO: add color type
+visibilityParams : expression ;       // true for visible, false for invisible
 
-actionParameters : parameter (COMMA parameter)* ;
+// Expressions
+expression : ID | literal ;
+literal    : INT | FLOAT | STRING | BOOLEAN ;
 
-// Examples:
-// moveTo(svg1, 100, 100);
-// resize(svg1, 50);
+
+// Targets
+target : ID ; // Target can be an individual ID or a group

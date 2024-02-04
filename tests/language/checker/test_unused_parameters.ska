@@ -1,0 +1,7 @@
+main {
+    unusedParamSequence(123);
+}
+
+sequence unusedParamSequence(unusedParam) {
+    delay(1000);
+}

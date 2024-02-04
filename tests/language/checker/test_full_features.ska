@@ -1,0 +1,31 @@
+main {
+    // Test du chargement d'un fichier SVG
+    loadSVG("./example.svg");
+
+    // Test de création de groupes et d'éléments
+    createGroup mainGroup(circle1, square1);
+    createGroup secondaryGroup(triangle1, line1);
+
+    // Test des différentes actions d'animation avec les nouveaux paramètres de temps
+    moveTo(mainGroup, 0, 500, 100, 100); // Commence immédiatement, dure 500ms, se déplace vers (100,100)
+    rotate(square1, 0, 500, 45);         // Commence immédiatement, dure 500ms, rotate de 45 degrés
+    changeColor(circle1, 0, 500, "red"); // Commence immédiatement, dure 500ms, change la couleur en rouge
+    setVisible(triangle1, 0, 500, false);// Commence immédiatement, dure 500ms, rend l'objet invisible
+
+    // Introduire un délai d'attente
+    delay(500);                          // Attendre 500ms avant de continuer
+
+    // Test des séquences avec des paramètres de temps
+    customAnimation(mainGroup, 500, 1000); // Commence à 500ms, dure 1000ms
+
+    // Test de l'exportation
+    exportAnimation(gif, "/chemin/export/animation.gif");
+    exportAnimation(mp4, "/chemin/export/animation.mp4");
+    exportAnimation(images, "/chemin/export/frames/");
+}
+
+// Définition d'une séquence personnalisée avec des paramètres de temps
+sequence customAnimation(group, start, duration) {
+    moveTo(group, start, duration, 200, 200); // Utilise les paramètres de temps fournis
+    changeColor(group, start, duration, "blue");
+}
