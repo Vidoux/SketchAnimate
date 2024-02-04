@@ -1,6 +1,6 @@
 main {
     // Test du chargement d'un fichier SVG
-    loadSVG("./lexer_parser/example.svg");
+    loadSVG("./example.svg");
 
     // Test de création de groupes et d'éléments
     createGroup mainGroup(circle1, square1);
@@ -21,7 +21,7 @@ main {
     // Test de l'exportation
     exportAnimation(gif, "/chemin/export/animation.gif");
     exportAnimation(mp4, "/chemin/export/animation.mp4");
-    exportAnimation(images, "/chemin/export/frames/", "framePrefix");
+    exportAnimation(images, "/chemin/export/frames/");
 }
 
 // Définition d'une séquence personnalisée avec des paramètres de temps

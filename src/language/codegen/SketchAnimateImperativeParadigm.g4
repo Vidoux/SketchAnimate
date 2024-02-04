@@ -2,7 +2,7 @@ grammar SketchAnimateImperativeParadigm;
 
 // Lexer Rules
 // Basic tokens
-ID        : [a-zA-Z] [a-zA-Z0-9]* ;     // Identifiers
+ID        : [a-zA-Z] [a-zA-Z0-9_]* ;     // Identifiers
 INT       : [0-9]+ ;                    // Integer numbers
 FLOAT     : [0-9]+'.'[0-9]+ ;           // Float values
 STRING    : '"' .*? '"';                // String literal for all quoted content
@@ -44,31 +44,31 @@ loadSVGStatement : 'loadSVG' '(' STRING ')' ;
 
 // Exporting animations
 exportAnimationStatement : 'exportAnimation' '(' exportParams ')' ;
-exportParams : formatParam (COMMA additionalParam)* ;
+exportParams : formatParam COMMA pathParam ;
 formatParam  : 'gif' | 'mp4' | 'images' ;
-additionalParam : STRING ;
+pathParam : STRING;
 
 // Group declarations
 groupDeclaration : 'createGroup' ID '(' idList ')' ;
 idList : ID (COMMA ID)* ;
 
 // Animation statements
-animationStatement : action '(' target COMMA startTime COMMA duration COMMA actionParameters? ')' ;
-actionParameters   : moveToParams | rotateParams | colorParams | visibilityParams | exportParams ;
+animationStatement : moveToStatement
+                   | rotateStatement
+                   | changeColorStatement
+                   | setVisibleStatement
+                   ;
 
-// Animation actions
-action : 'moveTo'
-       | 'rotate'
-       | 'changeColor'
-       | 'setVisible'
-       | 'exportAsGif'
-       | 'exportAsVideo'
-       ;
+moveToStatement      : 'moveTo' '(' target COMMA startTime COMMA duration COMMA moveToParams ')' ;
+rotateStatement      : 'rotate' '(' target COMMA startTime COMMA duration COMMA rotateParams ')' ;
+changeColorStatement : 'changeColor' '(' target COMMA startTime COMMA duration COMMA colorParams ')' ;
+setVisibleStatement  : 'setVisible' '(' target COMMA startTime COMMA duration COMMA visibilityParams ')' ;
 
 // Time related parameters
 startTime : expression ; // start time for animation (in ms)
 duration  : expression ; // animation duration (in ms)
 delayStatement : 'delay' '(' expression ')' ; // Introduces a waiting delay
+
 
 // Specific action parameters
 moveToParams : expression COMMA expression ; // x, y

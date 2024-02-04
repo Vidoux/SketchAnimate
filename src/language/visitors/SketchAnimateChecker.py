@@ -1,21 +1,18 @@
+import re
+
 from antlr4 import *
 from src.language.codegen.antlr_build.SketchAnimateImperativeParadigmParser import SketchAnimateImperativeParadigmParser
 from src.language.codegen.antlr_build.SketchAnimateImperativeParadigmVisitor import \
     SketchAnimateImperativeParadigmVisitor
 import xml.etree.ElementTree as ElementTree
-
-###
-# TODO:
-# - Ajout vérification paramètres non-utilisés dans les fonctions
-# -
-###
-
+import warnings
 
 
 class SketchAnimateChecker(SketchAnimateImperativeParadigmVisitor):
     def __init__(self):
         self.symbolTable = {}
         self.errors = []
+        self.warnings = []
 
     def visitMainBlock(self, ctx: SketchAnimateImperativeParadigmParser.MainBlockContext):
         for statement in ctx.statement():
@@ -31,9 +28,8 @@ class SketchAnimateChecker(SketchAnimateImperativeParadigmVisitor):
             for element in root.iter():
                 if 'id' in element.attrib:
                     svg_element_ids.append(element.attrib['id'])
-
             return svg_element_ids
-        except Exception as e:
+        except FileNotFoundError as e:
             raise SVGFileLoadError(svg_path, str(e))
 
     def visitLoadSVGStatement(self, ctx: SketchAnimateImperativeParadigmParser.LoadSVGStatementContext):
@@ -43,9 +39,8 @@ class SketchAnimateChecker(SketchAnimateImperativeParadigmVisitor):
             for element in svg_elements:
                 self.symbolTable[element] = {'type': 'svg_element'}
         except SVGFileLoadError as e:
-            line = ctx.start.line
-            column = ctx.start.column
             self.errors.append(e)
+            return  # Arrêtez le traitement ultérieur si c'est une erreur critique
 
     def visitGroupDeclaration(self, ctx: SketchAnimateImperativeParadigmParser.GroupDeclarationContext):
         group_name = ctx.ID().getText()
@@ -86,26 +81,123 @@ class SketchAnimateChecker(SketchAnimateImperativeParadigmVisitor):
         for statement in ctx.statement():
             self.visit(statement)
 
+        # Check for unused parameters
+        defined_parameters = self.symbolTable[sequence_name].get('parameters', set())
+        for param in defined_parameters:
+            if param not in self.symbolTable:
+                self.warnings.append(UnusedParameterWarning(param, line, column))
+
         # Supprimer les paramètres de la séquence de la table des symboles après l'analyse
         if ctx.parameterList():
             for param in ctx.parameterList().parameter():
                 param_name = param.getText()
                 del self.symbolTable[param_name]
 
-    def visitAnimationStatement(self, ctx: SketchAnimateImperativeParadigmParser.AnimationStatementContext):
-        target = ctx.target().getText()
-        line = ctx.start.line
-        column = ctx.start.column
+    def visitMoveToStatement(self, ctx: SketchAnimateImperativeParadigmParser.MoveToStatementContext):
+        if self.checkTarget(ctx.target().getText(), ctx):
+            self.visit(ctx.moveToParams())
+
+    def visitRotateStatement(self, ctx: SketchAnimateImperativeParadigmParser.RotateStatementContext):
+        if self.checkTarget(ctx.target().getText(), ctx):
+            self.visit(ctx.rotateParams())
+
+    def visitChangeColorStatement(self, ctx: SketchAnimateImperativeParadigmParser.ChangeColorStatementContext):
+        if self.checkTarget(ctx.target().getText(), ctx):
+            self.visit(ctx.colorParams())
+
+    def visitSetVisibleStatement(self, ctx: SketchAnimateImperativeParadigmParser.SetVisibleStatementContext):
+        if self.checkTarget(ctx.target().getText(), ctx):
+            self.visit(ctx.visibilityParams())
+
+    def checkTarget(self, target, ctx):
         if target not in self.symbolTable:
+            line = ctx.start.line
+            column = ctx.start.column
             self.errors.append(UndefinedSymbolError(target, line, column))
-            return
+            return False
+        return True
+
+    def visitMoveToParams(self, ctx: SketchAnimateImperativeParadigmParser.MoveToParamsContext):
+        x, y = ctx.expression()
+        if not self.isNumber(x) or not self.isNumber(y):
+            line = ctx.start.line
+            column = ctx.start.column
+            self.errors.append(TypeError("moveTo", "x, y", "number (float or int)", line, column))
+
+    def visitRotateParams(self, ctx):
+        if ctx is not None:
+            angle = ctx.expression()
+            if not self.isNumber(angle):
+                line = ctx.start.line
+                column = ctx.start.column
+                self.errors.append(TypeError("rotate", "angle", "number", line, column))
+
+    def visitChangeColorParams(self, ctx):
+        colorValue = ctx.expression()
+        if not self.isValidColor(colorValue):
+            line = ctx.start.line
+            column = ctx.start.column
+            self.errors.append(TypeError("changeColor", "color", "valid color format", line, column))
+
+    def visitSetVisibleParams(self, ctx):
+        visibility = ctx.expression()
+        if not visibility.getText() in ["true", "false"]:
+            line = ctx.start.line
+            column = ctx.start.column
+            self.errors.append(TypeError("setVisible", "visibility", "boolean", line, column))
+
+    def visitExportParams(self, ctx):
+        path_param = ctx.pathParam().getText().strip('"')
+        if not self.isPathValid(path_param):
+            line = ctx.start.line
+            column = ctx.start.column
+            self.errors.append(TypeError("exportAnimation", "path", "valid file path", line, column))
+
+    @staticmethod
+    def isPathValid(path_param):
+        # check if path is not blank (empty or only spaces)
+        if not path_param or path_param.isspace():
+            return False
+        return True
+
+    # Pattern: #FFFFFF ou #FFF
+    @staticmethod
+    def isValidColor(expression):
+        hex_color_pattern = re.compile(r'^#(?:[0-9a-fA-F]{3}){1,2}$')
+        return hex_color_pattern.match(expression.getText().strip('"'))
+        pass
+
+    # @staticmethod
+    # def isNumber(expression):
+    #
+    #     if isinstance(expression, SketchAnimateImperativeParadigmParser.LiteralContext):
+    #         literal = expression.literal()
+    #         return isinstance(literal,
+    #                           (SketchAnimateImperativeParadigmParser.INT, SketchAnimateImperativeParadigmParser.FLOAT))
+    #     return False
+
+    @staticmethod
+    def isNumber(expression):
+        if expression is None:
+            return False
+
+        if isinstance(expression, SketchAnimateImperativeParadigmParser.ExpressionContext):
+            # Vérifier si l'expression contient un littéral
+            literal = expression.literal()
+            if literal is not None:
+                # Vérifier si le littéral est un INT ou un FLOAT
+                return literal.INT() is not None or literal.FLOAT() is not None
+        return False
 
     def reportErrors(self):
-        print(self.symbolTable)
         if self.errors:
             for error in self.errors:
-                print(str(error))
-            raise Exception("Analysis completed with multiple errors.")
+                print(f"Error: {error}")
+            raise Exception("Analysis completed with errors.")
+
+        if self.warnings:
+            for warning in self.warnings:
+                warnings.warn(f"Warning: {warning}")
 
 
 # ---- Redefine Error handling ----
@@ -136,5 +228,17 @@ class MissingPositionalArgumentError(Exception):
 
 class SVGFileLoadError(Exception):
     def __init__(self, svg_path, error_message):
-        message = f"Erreur lors du chargement du fichier SVG '{svg_path}': {error_message}"
+        self.message = f"Error loading SVG file '{svg_path}': {error_message}"
+        super().__init__(self.message)
+
+
+class UnusedParameterWarning(Warning):
+    def __init__(self, param_name, line, column):
+        self.message = f"Line {line}, Column {column}: Unused parameter '{param_name}'"
+        super().__init__(self.message)
+
+
+class TypeError(Exception):
+    def __init__(self, action, parameter, expected_type, line, column):
+        message = f"Line {line}, Column {column}: Invalid type for '{parameter}' in '{action}'. Expected {expected_type}."
         super().__init__(message)

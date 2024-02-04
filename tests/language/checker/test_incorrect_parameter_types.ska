@@ -1,0 +1,4 @@
+main {
+    loadSVG("./example.svg");
+    rotate(circle1, 0,  500, "zero"); // Incorrect parameter type: string instead of int
+}
