@@ -13,4 +13,6 @@
 10. **Import/Export** : Charger et exporter des animations dans des formats appropriés.
 11. **Gestion des Couches** : Organiser les éléments en couches pour des animations complexes.
 12. **Interactivité** : Réactions aux événements utilisateur (clics, survols).
-13. Composabilité et Modularité : Permettre aux utilisateurs de créer et de réutiliser des composants d'animation modulaires.
+13. ** Composabilité et Modularité**: Permettre aux utilisateurs de créer et de réutiliser des composants d'animation modulaires. **
+14. **Ajouter des nouvelles formes**
+17. ** Plusieurs actions en parallèle, (prevoir la modification de**
