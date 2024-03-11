@@ -7,17 +7,16 @@ from src.language.codegen.antlr_build.SketchAnimateImperativeParadigmParser impo
 from SketchAnimateExecutor import SketchAnimateExecutor
 
 # Create Lexer and Parser
-input_stream = FileStream("example2_Imperative.ska")
+input_stream = FileStream("test_bapt.ska")
 lexer = SketchAnimateImperativeParadigmLexer(input_stream)
 token_stream = CommonTokenStream(lexer)
 print(token_stream.getText())
 parser = SketchAnimateImperativeParadigmParser(token_stream)
 parser.addErrorListener(ErrorListenerTest())
-tree = parser.program()  # 'program' is root rule
+tree = parser.program()
+
 
 executor = SketchAnimateExecutor()
 executor.visit(tree)
-
-
-executor.finalize_animation("final_animation.gif")
-print("end ")
+executor.execute_actions()
+print("Traitement terminé")

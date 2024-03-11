@@ -96,8 +96,6 @@ class SketchAnimateExecutor(SketchAnimateImperativeParadigmVisitor):
         self.svg_path = self.svg_path.replace('"', "")
 
         copy = "copy.svg"
-
-        # Copier le fichier
         shutil.copyfile(self.svg_path, copy)
 
         svg_animation = SVGAnimationLib(copy)
