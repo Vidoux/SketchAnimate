@@ -1,6 +1,6 @@
 import re
 
-from antlr4 import *
+
 from src.language.codegen.antlr_build.SketchAnimateImperativeParadigmParser import SketchAnimateImperativeParadigmParser
 from src.language.codegen.antlr_build.SketchAnimateImperativeParadigmVisitor import \
     SketchAnimateImperativeParadigmVisitor
@@ -109,6 +109,10 @@ class SketchAnimateChecker(SketchAnimateImperativeParadigmVisitor):
         if self.checkTarget(ctx.target().getText(), ctx):
             self.visit(ctx.visibilityParams())
 
+    def visitResizeStatement(self, ctx: SketchAnimateImperativeParadigmParser.SetVisibleStatementContext):
+        if self.checkTarget(ctx.target().getText(), ctx):
+            self.visit(ctx.resizeParams())
+
     def checkTarget(self, target, ctx):
         if target not in self.symbolTable:
             line = ctx.start.line
@@ -145,6 +149,13 @@ class SketchAnimateChecker(SketchAnimateImperativeParadigmVisitor):
             line = ctx.start.line
             column = ctx.start.column
             self.errors.append(TypeError("setVisible", "visibility", "boolean", line, column))
+
+    def visitResizeParams(self, ctx: SketchAnimateImperativeParadigmParser.ResizeParamsContext):
+        x, y = ctx.expression()
+        if not self.isNumber(x) or not self.isNumber(y):
+            line = ctx.start.line
+            column = ctx.start.column
+            self.errors.append(TypeError("resize", "x, y", "number (float or int)", line, column))
 
     def visitExportParams(self, ctx):
         path_param = ctx.pathParam().getText().strip('"')

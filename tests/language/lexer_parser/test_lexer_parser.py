@@ -32,6 +32,10 @@ class TestSketchAnimateLexerParser(unittest.TestCase):
     def test_sequence_error(self):
         self.run_test_file('test_sequence_error.ska', expected_errors=1)
 
+    def test_all_actions(self):
+        # Test avec un fichier qui contient toutes les actions possibles
+        self.run_test_file('test_all_actions.ska', 0)
+
 
 if __name__ == '__main__':
     unittest.main()

@@ -37,7 +37,7 @@ statement : groupDeclaration SEMI
           | sequenceInvocation SEMI
           | loadSVGStatement SEMI
           | exportAnimationStatement SEMI
-          | delayStatement SEMI; // Add delayStatement to the list of statements
+          | delayStatement SEMI; //TODO Remove or not
 
 // SVG related
 loadSVGStatement : 'loadSVG' '(' STRING ')' ;
@@ -57,24 +57,27 @@ animationStatement : moveToStatement
                    | rotateStatement
                    | changeColorStatement
                    | setVisibleStatement
+                   | resizeStatement
                    ;
 
 moveToStatement      : 'moveTo' '(' target COMMA startTime COMMA duration COMMA moveToParams ')' ;
 rotateStatement      : 'rotate' '(' target COMMA startTime COMMA duration COMMA rotateParams ')' ;
 changeColorStatement : 'changeColor' '(' target COMMA startTime COMMA duration COMMA colorParams ')' ;
 setVisibleStatement  : 'setVisible' '(' target COMMA startTime COMMA duration COMMA visibilityParams ')' ;
+resizeStatement      : 'resize' '(' target COMMA startTime COMMA duration COMMA resizeParams ')' ;
 
 // Time related parameters
 startTime : expression ; // start time for animation (in ms)
 duration  : expression ; // animation duration (in ms)
-delayStatement : 'delay' '(' expression ')' ; // Introduces a waiting delay
+delayStatement : 'delay' '(' expression ')' ; // Introduces a waiting delay TODO à voir
 
 
 // Specific action parameters
 moveToParams : expression COMMA expression ; // x, y
 rotateParams : expression ;             // angle
 colorParams  : expression ;           // TODO: add color type
-visibilityParams : expression ;       // true for visible, false for invisible
+visibilityParams : expression ;       // opacity coeff between 0 and 1 // TODO rename
+resizeParams : expression COMMA expression ; // x, y
 
 // Expressions
 expression : ID | literal ;
