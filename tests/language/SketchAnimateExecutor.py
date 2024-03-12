@@ -6,6 +6,7 @@ import shutil
 from cairosvg import svg2png
 import imageio
 from PIL import Image
+import tempfile
 
 class SketchAnimateExecutor(SketchAnimateImperativeParadigmVisitor):
 
@@ -110,6 +111,8 @@ class SketchAnimateExecutor(SketchAnimateImperativeParadigmVisitor):
         shutil.copyfile(self.svg_path, copy)
 
         svg_animation = SVGAnimationLib(copy)
+
+        temp_dir = tempfile.mkdtemp()
         png_files = []
 
         for i in range(self.duration_max):
@@ -117,7 +120,7 @@ class SketchAnimateExecutor(SketchAnimateImperativeParadigmVisitor):
                 if action['start_time'] <= i and i <= action['end_time']:
                     svg_animation.execute_action(action)
             # Export modified SVG to PNG
-            png_filename = f"frame_{i:03}.png"
+            png_filename = os.path.join(temp_dir, f"frame_{i:03}.png")
             svg_code = open("copy.svg", 'rt').read()
             svg2png(bytestring=svg_code, write_to=png_filename)
             png_files.append(png_filename)
@@ -132,10 +135,8 @@ class SketchAnimateExecutor(SketchAnimateImperativeParadigmVisitor):
         elif self.format_param == 'mp4':
             self.create_mp4(self.path_param, 10, png_files) #10 FPS pour la vidéo
 
-        # Nettoyage : Supprimer les fichiers PNG et le fichier SVG copié
-        for file in png_files:
-            os.remove(file)
         os.remove(copy)
+        shutil.rmtree(temp_dir)
 
     def add_background_to_png(self, image_path, bg_color=(255, 255, 255, 255), target_size=(912, 608)):
         """Ajoute un fond opaque à une image PNG et la redimensionne si nécessaire."""
