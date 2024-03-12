@@ -1,0 +1,43 @@
+
+main {
+    // Chargement d'un fichier SVG
+    loadSVG("example.svg");
+
+    // Déclarations de groupes
+    createGroup group1 (circle1, triangle1);
+    createGroup group2 (square1);
+
+    // Actions de mouvement
+    moveTo(circle1, 0, 500, 100, 200);
+    moveTo(group1, 500, 1000, 300, 400);
+
+    // Actions de rotation
+    rotate(circle1, 0, 500, 45);
+    rotate(group2, 500, 1000, 90);
+
+    // Actions de changement de couleur
+    changeColor(circle1, 0, 500, "#FF0000");
+    changeColor(group1, 500, 1000, "#00FF00");
+
+    // Actions de visibilité
+    setVisible(circle1, 0, 500, true);
+    setVisible(group2, 500, 1000, false);
+
+    // Actions de redimensionnement
+    resize(circle1, 0, 500, 1.5, 1.5);
+    resize(group1, 500, 1000, 0.5, 0.5);
+
+    // Invocation de séquence
+    mySequence(circle1, 200);
+
+
+    // Exportation d'animations
+    exportAnimation(gif, "animation.gif");
+    exportAnimation(mp4, "animation.mp4");
+    exportAnimation(images, "frames/");
+}
+
+// Déclaration de séquence
+sequence mySequence(param1, param2) {
+    moveTo(param1, 0, 500, param2, param2);
+}

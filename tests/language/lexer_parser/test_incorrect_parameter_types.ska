@@ -1,0 +1,4 @@
+
+main {
+    rotate(circle1, "zero", 500, "45"); // Types de paramètres incorrects
+}

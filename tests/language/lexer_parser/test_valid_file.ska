@@ -1,0 +1,10 @@
+
+main {
+    loadSVG("example.svg");
+    createGroup mainGroup(circle1, square1);
+    moveTo(circle1, 0, 500, 100, 100);
+    rotate(square1, 0, 500, 45);
+    changeColor(circle1, 0, 500, "#FF0000");
+    setVisible(square1, 0, 500, true);
+    delay(500);
+}

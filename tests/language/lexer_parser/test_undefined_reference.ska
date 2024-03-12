@@ -1,0 +1,4 @@
+
+main {
+    moveTo(nonExistentItem, 0, 500, 100, 200); // Référence non définie
+}

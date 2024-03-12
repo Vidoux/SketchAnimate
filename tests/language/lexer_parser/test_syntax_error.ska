@@ -1,0 +1,5 @@
+
+main {
+    loadSVG("invalid_path); // Erreur de syntaxe : guillemet manquant
+    moveTo(circle1, 0, 500, 100); // Erreur : paramètre manquant
+}
