@@ -117,6 +117,7 @@ class SketchAnimateExecutor(SketchAnimateImperativeParadigmVisitor):
             png_files.append(png_filename)
         duration = 0.1
         self.create_gif('output.gif', duration, png_files)
+        #self.create_mp4('output.mp4', 10, png_files)  # 10 FPS pour l'exemple
 
         # Clean up: Delete PNG files
         for file in png_files:
@@ -144,3 +145,13 @@ class SketchAnimateExecutor(SketchAnimateImperativeParadigmVisitor):
             list_img.append(png_image)
 
         imageio.mimsave(output_gif_path, list_img, duration=duration, loop=0)
+    def create_mp4(self, output_mp4_path, fps, png_files):
+        """Crée une vidéo MP4 à partir des images PNG stockées."""
+        writer = imageio.get_writer(output_mp4_path, fps=fps)
+
+        for image_path in png_files:
+            self.add_background_to_png(image_path)
+            png_image = imageio.imread(image_path)
+            writer.append_data(png_image)
+
+        writer.close()
