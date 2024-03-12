@@ -15,6 +15,8 @@ class SketchAnimateExecutor(SketchAnimateImperativeParadigmVisitor):
         self.svg_path = ""
         self.actions = []
         self.duration_max = 0
+        self.format_param = ""
+        self.path_param = ""
 
     def visitMainBlock(self, ctx: SketchAnimateImperativeParadigmParser.MainBlockContext):
         for statement in ctx.statement():
@@ -41,16 +43,24 @@ class SketchAnimateExecutor(SketchAnimateImperativeParadigmVisitor):
         else:
             print("Unknown animation statement")
 
+    def visitExportAnimationStatement(self, ctx: SketchAnimateImperativeParadigmParser.ExportAnimationStatementContext):
+        # Obtenir les paramètres d'exportation
+        export_params_ctx = ctx.exportParams()
+
+        # Extraire les informations spécifiques du format et du chemin
+        self.format_param = export_params_ctx.formatParam().getText()
+        self.path_param = export_params_ctx.pathParam().getText().strip('"')  # Enlever les guillemets
+
     def visitMoveToStatement(self, ctx: SketchAnimateImperativeParadigmParser.MoveToStatementContext):
         target, start_time, duration = ctx.target().getText(), int(ctx.startTime().getText()), int(ctx.duration().getText())
         # Retrieve x and y coordinates from moveToParams context
         move_to_params_ctx = ctx.moveToParams()
         x_coordinate, y_coordinate = float(move_to_params_ctx.expression(0).getText()), float(move_to_params_ctx.expression(1).getText())
-        step_x = x_coordinate/(duration-start_time+2)
-        step_y = y_coordinate/(duration-start_time+2)
+        step_x = x_coordinate/(duration+2)
+        step_y = y_coordinate/(duration+2)
         end_time = start_time + duration
         if end_time > self.duration_max:
-            self.duration_max = end_time + 2
+            self.duration_max = end_time+2
         self.actions.append({
             'type': 'move',
             'target': target,
@@ -111,13 +121,21 @@ class SketchAnimateExecutor(SketchAnimateImperativeParadigmVisitor):
             svg_code = open("copy.svg", 'rt').read()
             svg2png(bytestring=svg_code, write_to=png_filename)
             png_files.append(png_filename)
-        duration = 0.1
-        self.create_gif('output.gif', duration, png_files)
-        #self.create_mp4('output.mp4', 10, png_files)  # 10 FPS pour l'exemple
 
-        # Clean up: Delete PNG files
+        output_dir = os.path.dirname(self.path_param)
+        if not os.path.exists(output_dir):
+            os.makedirs(output_dir)
+
+        # Exportation en fonction du format spécifié
+        if self.format_param == 'gif':
+            self.create_gif(self.path_param, 0.1, png_files) #0.1 par frame
+        elif self.format_param == 'mp4':
+            self.create_mp4(self.path_param, 10, png_files) #10 FPS pour la vidéo
+
+        # Nettoyage : Supprimer les fichiers PNG et le fichier SVG copié
         for file in png_files:
             os.remove(file)
+        os.remove(copy)
 
     def add_background_to_png(self, image_path, bg_color=(255, 255, 255, 255), target_size=(912, 608)):
         """Ajoute un fond opaque à une image PNG et la redimensionne si nécessaire."""
