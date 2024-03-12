@@ -21,4 +21,5 @@ main {
     moveTo(circle5, 10, 2, 0, -90);
     moveTo(circle5, 13, 14, 0, 646.5);
 
+    exportAnimation(gif,"./export/animation.gif");
     }
