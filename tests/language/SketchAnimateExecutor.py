@@ -171,5 +171,4 @@ class SketchAnimateExecutor(SketchAnimateImperativeParadigmVisitor):
             self.add_background_to_png(image_path)
             png_image = imageio.imread(image_path)
             writer.append_data(png_image)
-
         writer.close()

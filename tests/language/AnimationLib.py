@@ -114,7 +114,6 @@ class SVGAnimationLib:
         elem = self.element[0] if self.element else None
 
         if elem is not None:
-            # Construire ou mettre à jour l'attribut 'style'
             style = elem.get('style', '')
             if 'fill' in style:
                 style = re.sub(r'(?<=fill:)[^;]+', new_color, style)
@@ -130,6 +129,3 @@ class SVGAnimationLib:
         else:
             print("Error: No element found.")
 
-
-svg_animator = SVGAnimationLib('lexer_parser/example.svg')
-svg_animator.execute_action({'type': 'change_color', 'target': 'circle1', 'target_color': "red"})
