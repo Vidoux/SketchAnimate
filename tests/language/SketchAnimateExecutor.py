@@ -49,7 +49,7 @@ class SketchAnimateExecutor(SketchAnimateImperativeParadigmVisitor):
         step_x = x_coordinate/(duration-start_time+2)
         step_y = y_coordinate/(duration-start_time+2)
         end_time = start_time + duration
-        if end_time > self.duration_max :
+        if end_time > self.duration_max:
             self.duration_max = end_time + 2
         self.actions.append({
             'type': 'move',
@@ -106,9 +106,6 @@ class SketchAnimateExecutor(SketchAnimateImperativeParadigmVisitor):
             for action in self.actions:
                 if action['start_time'] <= i and i <= action['end_time']:
                     svg_animation.execute_action(action)
-                    print("yes")
-                else:
-                    print("0")
             # Export modified SVG to PNG
             png_filename = f"frame_{i:03}.png"
             svg_code = open("copy.svg", 'rt').read()
