@@ -15,7 +15,7 @@ class SketchAnimateExecutor(SketchAnimateImperativeParadigmVisitor):
         self.groups = {}
         self.svg_path = ""
         self.actions = []
-        self.duration_max = 0  # Durée maximale nécessaire
+        self.duration_max = 0
 
     def visitMainBlock(self, ctx: SketchAnimateImperativeParadigmParser.MainBlockContext):
         for statement in ctx.statement():
@@ -47,10 +47,11 @@ class SketchAnimateExecutor(SketchAnimateImperativeParadigmVisitor):
         # Retrieve x and y coordinates from moveToParams context
         move_to_params_ctx = ctx.moveToParams()
         x_coordinate, y_coordinate = float(move_to_params_ctx.expression(0).getText()), float(move_to_params_ctx.expression(1).getText())
-        step_x = x_coordinate/(duration-start_time)
-        step_y = y_coordinate/(duration-start_time)
+        step_x = x_coordinate/(duration-start_time+2)
+        step_y = y_coordinate/(duration-start_time+2)
         end_time = start_time + duration
-
+        if end_time > self.duration_max :
+            self.duration_max = end_time + 2
         self.actions.append({
             'type': 'move',
             'target': target,
@@ -66,6 +67,8 @@ class SketchAnimateExecutor(SketchAnimateImperativeParadigmVisitor):
         rotation_angle = int(rotate_params_ctx.expression().getText())
         end_time = start_time + duration
         step = rotation_angle/(duration-start_time)
+        if end_time > self.duration_max:
+            self.duration_max = end_time + 2
         self.actions.append({
             'type': 'rotate',
             'target': target,
@@ -78,11 +81,11 @@ class SketchAnimateExecutor(SketchAnimateImperativeParadigmVisitor):
 
     def visitChangeColorStatement(self, ctx: SketchAnimateImperativeParadigmParser.ChangeColorStatementContext):
         target, start_time, duration = ctx.target().getText(), int(ctx.startTime().getText()), int(ctx.duration().getText())
-        # Retrieve the new color from colorParams context
         color_params_ctx = ctx.colorParams()
         new_color = color_params_ctx.expression().getText()
         end_time = start_time + duration
-
+        if end_time > self.duration_max:
+            self.duration_max = end_time + 2
         self.actions.append({
             'type': 'change_color',
             'target': target,
@@ -92,7 +95,6 @@ class SketchAnimateExecutor(SketchAnimateImperativeParadigmVisitor):
         })
 
     def execute_actions(self):
-        self.duration_max = 30
         self.svg_path = self.svg_path.replace('"', "")
 
         copy = "copy.svg"
@@ -103,35 +105,40 @@ class SketchAnimateExecutor(SketchAnimateImperativeParadigmVisitor):
 
         for i in range(self.duration_max):
             for action in self.actions:
-                if action['start_time'] <= i <= action['end_time']:
+                if action['start_time'] <= i and i <= action['end_time']:
                     svg_animation.execute_action(action)
-
+                    print("yes")
+                else:
+                    print("0")
             # Export modified SVG to PNG
             png_filename = f"frame_{i:03}.png"
             svg_code = open("copy.svg", 'rt').read()
             svg2png(bytestring=svg_code, write_to=png_filename)
             png_files.append(png_filename)
         duration = 0.1
-        # Create an animated GIF from the PNG files
         self.create_gif('output.gif', duration, png_files)
 
         # Clean up: Delete PNG files
         for file in png_files:
             os.remove(file)
 
-    def add_background_to_png(self, png_path, bg_color=(255, 255, 255)):
+    def add_background_to_png(self, image_path, bg_color=(255, 255, 255, 255)):
         """Ajoute un fond opaque à une image PNG."""
-        with Image.open(png_path) as img:
-            with Image.new('RGB', img.size, bg_color) as background:
+        with Image.open(image_path) as img:
+            if img.mode == 'RGBA':
+                background = Image.new('RGBA', img.size, bg_color)
                 background.paste(img, mask=img.split()[3])  # Utiliser le canal alpha comme masque
-                background.save(png_path)
+            else:
+                background = Image.new('RGB', img.size, bg_color[:3])
+                background.paste(img)
+
+            background.save(image_path)
 
     def create_gif(self, output_gif_path, duration, png_files):
         """Crée un GIF à partir des images PNG stockées."""
         list_img = []
 
         for image_path in png_files:
-            # Ajouter un fond à chaque image PNG
             self.add_background_to_png(image_path)
             png_image = imageio.imread(image_path)
             list_img.append(png_image)
