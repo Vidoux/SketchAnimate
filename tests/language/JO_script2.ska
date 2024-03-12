@@ -3,24 +3,22 @@ main {
 
     moveTo(circle1, 1, 9, 0, 353.5);
     moveTo(circle1, 11, 2, 0, -80);
-    moveTo(circle1, 14, 2, 0, 80);
+    moveTo(circle1, 14, 12, 0, 593.5);
 
     moveTo(circle2, 1, 12, 0, 353.5);
     moveTo(circle2, 14, 2, 0, -60);
-    moveTo(circle2, 17, 2, 0, 60);
+    moveTo(circle2, 17, 12, 0, 573.5);
 
-    moveTo(circle3, 1, 15, 0, 353.5);
-    moveTo(circle3, 17, 2, 0, -50);
-    moveTo(circle3, 20, 2, 0, 50);
+    moveTo(circle3, 1, 14, 0, 353.5);
+    moveTo(circle3, 16, 2, 0, -60);
+    moveTo(circle3, 19, 12, 0, 573.5);
 
     moveTo(circle4, 1, 10, 0, 446.5);
     moveTo(circle4, 12, 2, 0, -70);
-    moveTo(circle4, 15, 2, 0, 70);
+    moveTo(circle4, 15, 14, 0, 646.5);
 
     moveTo(circle5, 1, 8, 0, 446.5);
     moveTo(circle5, 10, 2, 0, -90);
-    moveTo(circle5, 13, 2, 0, 90);
-
-    exportAnimation(gif,"./export/animation.gif");
+    moveTo(circle5, 13, 14, 0, 646.5);
 
     }
