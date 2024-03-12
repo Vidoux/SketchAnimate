@@ -1,0 +1,8 @@
+main {
+    loadSVG("./lexer_parser/Olympic_flag.svg");
+    moveTo(circle1, 1, 9, 0, 353.5);
+    moveTo(circle2, 1, 12, 0, 353.5);
+    moveTo(circle3, 1, 15, 0, 353.5);
+    moveTo(circle4, 1, 10, 0, 446.5);
+    moveTo(circle5, 1, 8, 0, 446.5);
+}
