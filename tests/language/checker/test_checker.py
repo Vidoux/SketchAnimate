@@ -8,7 +8,7 @@ from src.language.listeners.SketchAnimateErrorListener import SketchAnimateError
 
 def main():
     # Chemin vers le fichier de test
-    file_path = './test_full_features.ska'
+    file_path = '../JO_script.ska'
 
     # Lecture du fichier de test
     input_stream = antlr4.FileStream(file_path, encoding='utf-8')
@@ -17,6 +17,7 @@ def main():
     lexer = SketchAnimateImperativeParadigmLexer(input_stream)
     token_stream = antlr4.CommonTokenStream(lexer)
     parser = SketchAnimateImperativeParadigmParser(token_stream)
+    print(token_stream.getText())
 
     # Personnalised error listener
     error_listener = SketchAnimateErrorListener()

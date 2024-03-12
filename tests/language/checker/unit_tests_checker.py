@@ -43,7 +43,7 @@ class TestSketchAnimateChecker(unittest.TestCase):
         print(checker.warnings)
 
     def test_undefined_group_reference(self):
-        checker = self.run_checker('test_undefined_group_reference.ska')
+        checker = self.run_checker('../test_undefined_group_reference.ska')
         self.assertGreater(len(checker.errors), 0)
         print(checker.errors)
         print(checker.warnings)

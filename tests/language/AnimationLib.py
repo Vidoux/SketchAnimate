@@ -131,5 +131,5 @@ class SVGAnimationLib:
             print("Error: No element found.")
 
 
-svg_animator = SVGAnimationLib('./lexer_parser/example.svg')
+svg_animator = SVGAnimationLib('lexer_parser/example.svg')
 svg_animator.execute_action({'type': 'change_color', 'target': 'circle1', 'target_color': "red"})

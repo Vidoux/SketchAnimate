@@ -5,7 +5,6 @@ import os
 import shutil
 from cairosvg import svg2png
 import imageio
-import numpy as np
 from PIL import Image
 
 class SketchAnimateExecutor(SketchAnimateImperativeParadigmVisitor):
@@ -147,6 +146,7 @@ class SketchAnimateExecutor(SketchAnimateImperativeParadigmVisitor):
             list_img.append(png_image)
 
         imageio.mimsave(output_gif_path, list_img, duration=duration, loop=0)
+
     def create_mp4(self, output_mp4_path, fps, png_files):
         """Crée une vidéo MP4 à partir des images PNG stockées."""
         writer = imageio.get_writer(output_mp4_path, fps=fps)

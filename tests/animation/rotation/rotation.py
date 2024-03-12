@@ -49,7 +49,7 @@ def main():
         images.append(png_image)
 
     # Créer un GIF à partir des images PNG
-    imageio.mimsave(output_gif, images, duration=0.1)  # 0.1 seconde par image
+    imageio.mimsave(output_gif, images, duration=0.01)  # 0.1 seconde par image
 
     # Supprimer les fichiers PNG et SVG intermédiaires
     for degree in range(0, 361, 10):
