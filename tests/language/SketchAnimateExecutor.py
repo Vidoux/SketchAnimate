@@ -123,12 +123,14 @@ class SketchAnimateExecutor(SketchAnimateImperativeParadigmVisitor):
         for file in png_files:
             os.remove(file)
 
-    def add_background_to_png(self, image_path, bg_color=(255, 255, 255, 255)):
-        """Ajoute un fond opaque à une image PNG."""
+    def add_background_to_png(self, image_path, bg_color=(255, 255, 255, 255), target_size=(912, 608)):
+        """Ajoute un fond opaque à une image PNG et la redimensionne si nécessaire."""
         with Image.open(image_path) as img:
+            img = img.resize(target_size, Image.Resampling.LANCZOS)  # Utilisation de Image.Resampling.LANCZOS
+
             if img.mode == 'RGBA':
                 background = Image.new('RGBA', img.size, bg_color)
-                background.paste(img, mask=img.split()[3])  # Utiliser le canal alpha comme masque
+                background.paste(img, mask=img.split()[3])
             else:
                 background = Image.new('RGB', img.size, bg_color[:3])
                 background.paste(img)
