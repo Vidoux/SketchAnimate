@@ -3,8 +3,8 @@ grammar SketchAnimateImperativeParadigm;
 // Lexer Rules
 // Basic tokens
 ID        : [a-zA-Z] [a-zA-Z0-9_]* ;     // Identifiers
-INT       : [0-9]+ ;                    // Integer numbers
-FLOAT     : [0-9]+'.'[0-9]+ ;           // Float values
+INT  : '-'?[0-9]+ ;                    // Integer numbers (including negative)
+FLOAT: '-'?[0-9]+'.'[0-9]+ ;           // Float values (including negative)
 STRING    : '"' .*? '"';                // String literal for all quoted content
 BOOLEAN   : 'true' | 'false';           // Boolean values
 
