@@ -1,6 +1,6 @@
 from src.language.codegen.antlr_build.SketchAnimateImperativeParadigmParser import SketchAnimateImperativeParadigmParser
 from src.language.codegen.antlr_build.SketchAnimateImperativeParadigmVisitor import SketchAnimateImperativeParadigmVisitor
-from tests.language.AnimationLib import SVGAnimationLib
+from src.language.executor.AnimationLib import SVGAnimationLib
 import os
 import shutil
 from cairosvg import svg2png
