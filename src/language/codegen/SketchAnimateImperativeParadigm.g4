@@ -79,10 +79,11 @@ colorParams  : expression ;           // TODO: add color type
 visibilityParams : expression ;       // opacity coeff between 0 and 1 // TODO rename
 resizeParams : expression COMMA expression ; // x, y
 
-// Expressions
-expression : ID | literal ;
+// Expressionsa
+expression : ID | literal | minusExpression;
 literal    : INT | FLOAT | STRING | BOOLEAN ;
 
+minusExpression : '-' expression ;
 
 // Targets
 target : ID ; // Target can be an individual ID or a group
