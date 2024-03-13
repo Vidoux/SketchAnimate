@@ -125,10 +125,9 @@ To create your first animation script using the SketchAnimate DSL:
 2. **Compile Your Animation Script**: Use the SketchAnimate compiler to compile your script and apply the animations to your SVG.
    
    ```bash
-   python .py <your_script>.ska
+   python src/cli/sketchanimate_cli.py <your_script>.ska
    ```
    
-// TODO
 ## Usage
 
 Begin by reading the [user guide](docs/user-guide.md) for detailed instructions on using SketchAnimate and scripting animations with the DSL. The guide covers everything from basic animations to more complex scenarios.
