@@ -21,7 +21,6 @@ main {
     // Test de l'exportation
     exportAnimation(gif, "/chemin/export/animation.gif");
     exportAnimation(mp4, "/chemin/export/animation.mp4");
-    exportAnimation(images, "/chemin/export/frames/", "framePrefix");
 }
 
 // Définition d'une séquence personnalisée avec des paramètres de temps

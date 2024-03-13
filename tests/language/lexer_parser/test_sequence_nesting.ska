@@ -8,5 +8,5 @@ sequence outerSequence(group) {
 }
 
 sequence innerSequence(group) {
-    moveTo(group, 300, 300, 700);
+    moveTo(group,0, 300, 300, 700);
 }

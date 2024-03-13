@@ -18,7 +18,6 @@ class SketchAnimateChecker(SketchAnimateImperativeParadigmVisitor):
         for statement in ctx.statement():
             self.visit(statement)
 
-    # TODO Externaliser la fonction car aussi utile dans Executor
     @staticmethod
     def loadSVGElements(svg_path):
         try:
@@ -164,6 +163,25 @@ class SketchAnimateChecker(SketchAnimateImperativeParadigmVisitor):
             column = ctx.start.column
             self.errors.append(TypeError("exportAnimation", "path", "valid file path", line, column))
 
+    def visitSequenceInvocation(self, ctx: SketchAnimateImperativeParadigmParser.SequenceInvocationContext):
+        sequence_name = ctx.ID().getText()
+        line = ctx.start.line
+        column = ctx.start.column
+
+        if sequence_name not in self.symbolTable or self.symbolTable[sequence_name]['type'] != 'sequence':
+            self.errors.append(UndefinedSymbolError(sequence_name, line, column))
+            return
+
+        sequence_definition = self.symbolTable[sequence_name]
+        passed_parameters = ctx.argumentList().expression() if ctx.argumentList() else []
+
+        defined_parameters = sequence_definition.get('parameters', [])
+        if len(passed_parameters) != len(defined_parameters):
+            self.errors.append(
+                TypeError(sequence_name, f"Expected {len(defined_parameters)} parameters, got {len(passed_parameters)}",
+                          line, column))
+            return
+
     @staticmethod
     def isPathValid(path_param):
         # check if path is not blank (empty or only spaces)
@@ -178,14 +196,6 @@ class SketchAnimateChecker(SketchAnimateImperativeParadigmVisitor):
         return hex_color_pattern.match(expression.getText().strip('"'))
         pass
 
-    # @staticmethod
-    # def isNumber(expression):
-    #
-    #     if isinstance(expression, SketchAnimateImperativeParadigmParser.LiteralContext):
-    #         literal = expression.literal()
-    #         return isinstance(literal,
-    #                           (SketchAnimateImperativeParadigmParser.INT, SketchAnimateImperativeParadigmParser.FLOAT))
-    #     return False
 
     @staticmethod
     def isNumber(expression):
@@ -212,7 +222,6 @@ class SketchAnimateChecker(SketchAnimateImperativeParadigmVisitor):
 
 
 # ---- Redefine Error handling ----
-# TODO externaliser dans un autre fichier
 class RedefinitionError(Exception):
     def __init__(self, symbol, line, column):
         message = f"Line {line}, Column {column}: Redefinition of '{symbol}'"

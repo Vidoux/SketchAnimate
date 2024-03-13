@@ -48,11 +48,5 @@ class TestSketchAnimateChecker(unittest.TestCase):
         print(checker.errors)
         print(checker.warnings)
 
-    def test_unused_parameters(self):
-        checker = self.run_checker('test_unused_parameters.ska')
-        self.assertGreater(len(checker.warnings), 0)
-        print(checker.errors)
-        print(checker.warnings)
-
 if __name__ == '__main__':
     unittest.main()

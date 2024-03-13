@@ -1,3 +1,9 @@
+// Définition d'une séquence personnalisée avec des paramètres de temps
+sequence customAnimation(group, start, duration) {
+    moveTo(group, start, duration, 200, 200); // Utilise les paramètres de temps fournis
+    changeColor(group, start, duration, "blue");
+}
+
 main {
     // Test du chargement d'un fichier SVG
     loadSVG("./example.svg");
@@ -24,8 +30,3 @@ main {
     exportAnimation(images, "/chemin/export/frames/");
 }
 
-// Définition d'une séquence personnalisée avec des paramètres de temps
-sequence customAnimation(group, start, duration) {
-    moveTo(group, start, duration, 200, 200); // Utilise les paramètres de temps fournis
-    changeColor(group, start, duration, "blue");
-}
