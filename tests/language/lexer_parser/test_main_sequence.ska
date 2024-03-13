@@ -1,8 +1,9 @@
 main {
-    createGroup mainGroup(circle, square);
+    loadSVG("./example.svg");
+    createGroup mainGroup(triangle1, square1);
     testSequence(mainGroup);
 }
 
 sequence testSequence(group) {
-    moveTo(group, 100, 100, 300);
+    moveTo(group, 0,100, 100, 300);
 }
