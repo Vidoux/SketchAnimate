@@ -6,7 +6,7 @@ import antlr4
 
 from src.language.codegen.antlr_build.SketchAnimateImperativeParadigmLexer import SketchAnimateImperativeParadigmLexer
 from src.language.codegen.antlr_build.SketchAnimateImperativeParadigmParser import SketchAnimateImperativeParadigmParser
-from tests.language.SketchAnimateExecutor import SketchAnimateExecutor
+from src.language.executor.SketchAnimateExecutor import SketchAnimateExecutor
 
 
 from src.language.visitors.SketchAnimateChecker import SketchAnimateChecker
