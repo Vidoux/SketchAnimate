@@ -1,6 +1,6 @@
 from src.language.codegen.antlr_build.SketchAnimateImperativeParadigmParser import SketchAnimateImperativeParadigmParser
 from src.language.codegen.antlr_build.SketchAnimateImperativeParadigmVisitor import SketchAnimateImperativeParadigmVisitor
-from src.language.executor.AnimationLib import SVGAnimationLib
+from src.language.visitors.AnimationLib import SVGAnimationLib
 import os
 import shutil
 from cairosvg import svg2png
@@ -86,7 +86,22 @@ class SketchAnimateExecutor(SketchAnimateImperativeParadigmVisitor):
             'end_time': end_time,
             'target_degree': rotation_angle,
             'step': step
-
+        })
+    def visitRotateStatement(self, ctx: SketchAnimateImperativeParadigmParser.RotateStatementContext):
+        target, start_time, duration = ctx.target().getText(), int(ctx.startTime().getText()), int(ctx.duration().getText())
+        rotate_params_ctx = ctx.rotateParams()
+        rotation_angle = int(rotate_params_ctx.expression().getText())
+        end_time = start_time + duration
+        step = rotation_angle/(duration-start_time)
+        if end_time > self.duration_max:
+            self.duration_max = end_time + 2
+        self.actions.append({
+            'type': 'rotate',
+            'target': target,
+            'start_time': start_time,
+            'end_time': end_time,
+            'target_degree': rotation_angle,
+            'step': step
         })
 
     def visitChangeColorStatement(self, ctx: SketchAnimateImperativeParadigmParser.ChangeColorStatementContext):
