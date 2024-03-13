@@ -6,6 +6,7 @@ Welcome to SketchAnimate! This guide will walk you through setting up SketchAnim
 
 Before you start, ensure you have the following installed:
 
+    Linux environnement on your computer (Windows tutorial is coming soon)
     Python 3.7 or later
     ANTLR 4.7.2 or later (for generating parsers from grammar files)
 
