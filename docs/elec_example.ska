@@ -1,0 +1,19 @@
+main {
+    loadSVG("./elec.svg");
+
+    delay(30)
+
+    moveTo(switch, 30, 6, 0,-3);
+    changeColor(light_circle, 36, 1, "yellow");
+
+    delay(30)
+
+    moveTo(switch,70, 6, 0,3);
+    changeColor(light_circle, 71, 1, "white");
+
+    delay(30)
+
+    exportAnimation(gif,"./export/animation.gif");
+    exportAnimation(mp4,"./export/animation.mp4");
+
+}
