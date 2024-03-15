@@ -8,7 +8,7 @@ from src.language.listeners.SketchAnimateErrorListener import SketchAnimateError
 
 def main():
     # Chemin vers le fichier de test
-    file_path = '../JO_script.ska'
+    file_path = '../lexer_parser/JO_script.ska'
 
     # Lecture du fichier de test
     input_stream = antlr4.FileStream(file_path, encoding='utf-8')

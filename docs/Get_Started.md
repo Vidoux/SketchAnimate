@@ -41,8 +41,8 @@ main {
 
     moveTo(circle1, 0, 500, 100, 100); // Move to (100, 100) over 500ms
     rotate(square1, 200, 500, 80); // rotate square1 to 80°, starting at 200ms and during 500ms
+    
     exportAnimation(gif,"./export/animation.gif");
-
 }
 ```
 

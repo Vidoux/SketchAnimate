@@ -1,6 +1,4 @@
 import re
-
-
 from src.language.codegen.antlr_build.SketchAnimateImperativeParadigmParser import SketchAnimateImperativeParadigmParser
 from src.language.codegen.antlr_build.SketchAnimateImperativeParadigmVisitor import \
     SketchAnimateImperativeParadigmVisitor
