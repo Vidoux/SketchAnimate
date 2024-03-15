@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="210mm"
+   viewBox="0 0 210 297"
+   version="1.1"
+   id="svg5"
+   inkscape:version="1.1.2 (0a00cf5339, 2022-02-04)"
+   sodipodi:docname="elctr.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview7"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:document-units="mm"
+     showgrid="true"
+     inkscape:zoom="0.74742565"
+     inkscape:cx="119.74435"
+     inkscape:cy="561.25984"
+     inkscape:window-width="1920"
+     inkscape:window-height="1048"
+     inkscape:window-x="0"
+     inkscape:window-y="32"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="layer1">
+    <inkscape:grid
+       type="xygrid"
+       id="grid330" />
+  </sodipodi:namedview>
+  <defs
+     id="defs2" />
+  <g
+     inkscape:label="Calque 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <line id="fil1" x1="15.875" y1="58.208333" x2="52.916666" y2="58.208333" style="stroke:#000000;stroke-width:0.264583" />
+    <line id="fil2" x1="74.083334" y1="58.208333" x2="111.125" y2="58.208333" style="stroke:#000000;stroke-width:0.264583" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 15.875,89.958333 h 37.041666 v 0 0 0"
+       id="fil3" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="M 74.083334,89.958333 H 111.125 v 0 0 0"
+       id="fil4" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="M 111.125,58.208333 V 89.958332"
+       id="fil5" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.216031px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="M 15.875,89.958332 V 79.375"
+       id="fil6" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.324047px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 15.875,58.208333 v 15.875"
+       id="fil7" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="M 26.458333,79.374999 H 5.2916666"
+       id="fil_bat_1" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="M 10.583333,74.083332 H 21.166666"
+       id="fil_bat_2" />
+    <line
+      id="switch"
+      x1="47.625" y1="95.25"
+      x2="79.375" y2="95.25"
+    style="stroke:#000000;stroke-width:0.264583;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+
+    <ellipse
+       style="fill:#000000;fill-rule:evenodd;stroke-width:0.151717"
+       id="switch-connector1"
+       cx="52.971001"
+       cy="90.183739"
+       rx="1.5290295"
+       ry="1.5054141"
+    />
+    <ellipse
+       style="fill:#000000;fill-rule:evenodd;stroke-width:0.151717"
+       id="switch-connector2"
+       cx="73.791069"
+       cy="89.631813"
+       rx="1.5290295"
+       ry="1.5054141" />
+    <circle
+       style="fill:white;stroke-width:0.264583;stroke:#000000;stroke-opacity:1;fill-opacity:1"
+       id="light_circle"
+       cx="63.5"
+       cy="58.208332"
+       r="10.583333" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="M 58.208333,52.916666 68.791666,63.499999"
+       id="fil_light1" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="M 58.208333,63.499999 68.791667,52.916667"
+       id="fil_light2" />
+  </g>
+</svg>
